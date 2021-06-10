@@ -39,6 +39,9 @@ public class MC {
 
         if (tC == 3 && tM == 3) {
             isGoal = true;
+            for(int a = 0; a < margem1.length; a++){
+                margem1[a] = null;
+            }
         }
         return isGoal;
     }
@@ -299,7 +302,7 @@ public class MC {
         int times = 0;
         for (int a = 0; a < margem2.length; a++) {
             if (margem2[a] != null) {
-                if (margem2[a] == "Missionario") {
+                if (margem2[a].toString() == "Missionario") {
                     margem2[a] = null;
                     times += 1;
                 }
@@ -314,50 +317,66 @@ public class MC {
     public void removeCanibal2(int quant) {
         int times = 0;
         for (int a = 0; a < margem1.length; a++) {
-            if (margem2[a] == "Canibal") {
-                margem2[a] = null;
-                times += 1;
+            if (margem2[a] != null) {
+                if (margem2[a].toString() == "Canibal") {
+                    margem2[a] = null;
+                    times += 1;
+                }
+                if (times == quant) {
+                    break;
+                }
             }
-            if (times == quant) {
-                break;
-            }
+
         }
     }
 
     //REMOVER AMBOS DA MARGEM1
     public void removeBoth1() {
         for (int a = 0; a < margem1.length; a++) {
-            if (margem1[a] == "Missionario") {
-                margem1[a] = null;
-                break;
+            if (margem1[a] != null) {
+                if (margem1[a].toString() == "Missionario") {
+                    margem1[a] = null;
+                    break;
+                }
             }
+
         }
 
         for (int a = 0; a < margem1.length; a++) {
-            if (margem1[a] == "Canibal") {
-                margem1[a] = null;
-                break;
+            if (margem1[a] != null) {
+                if (margem1[a].toString() == "Canibal") {
+                    margem1[a] = null;
+                    break;
+                }
             }
+
         }
     }
 
     //REMOVER AMBOS DA MARGEM2
     public void removeBoth2() {
         for (int a = 0; a < margem2.length; a++) {
-            if (margem2[a] == "Missionario") {
-                margem2[a] = null;
-                break;
+            if (margem2[a] != null) {
+                if (margem2[a].toString() == "Missionario") {
+                    margem2[a] = null;
+                    break;
+                }
             }
+
         }
 
         for (int a = 0; a < margem2.length; a++) {
-            if (margem2[a] == "Canibal") {
-                margem2[a] = null;
-                break;
+            if (margem2[a] != null) {
+                if (margem2[a].toString() == "Canibal") {
+                    margem2[a] = null;
+                    break;
+                }
             }
+
         }
     }
 
+    //==========================================
     public void moverUmMissionario() {
         if (verifyMovimentMessionary(1)) {
             for (int c = 0; c < margem2.length; c++) {
@@ -408,9 +427,8 @@ public class MC {
             removeCanibal(1);
             System.out.println("Devolveu um canibal");
             state();
-
+            goal = goal();
         }
-        goal = goal();
     }
 
     public void moverDoisCanibais() {
@@ -430,9 +448,8 @@ public class MC {
             removeCanibal(2);
             System.out.println("Moveu os dois canibais");
             state();
-
+            goal = goal();
         }
-        goal = goal();
     }
 
     public void devolverUmMissionario() {
@@ -447,9 +464,9 @@ public class MC {
             removeMessionary2(1);
             System.out.println("Devolveu um missionario");
             state();
+            goal = goal();
 
         }
-        goal = goal();
     }
 
     public void devolverDoisMissionarios() {
@@ -467,9 +484,9 @@ public class MC {
             removeMessionary2(2);
             System.out.println("Devolveu dois missionarios");
             state();
-
+            goal = goal();
         }
-        goal = goal();
+
     }
 
     public void devolverUmCanibal() {
@@ -491,9 +508,9 @@ public class MC {
             removeMessionary2(1);
             System.out.println("Devolveu um canibal");
             state();
-
+            goal = goal();
         }
-        goal = goal();
+
     }
 
     public void devolverDoisCanibais() {
@@ -524,9 +541,10 @@ public class MC {
             removeMessionary2(1);
             System.out.println("Devolveu dois canibais");
             state();
+            goal = goal();
 
         }
-        goal = goal();
+
     }
 
     public void moverOsDois() {
@@ -562,9 +580,9 @@ public class MC {
             }
             System.out.println("Moveu os dois");
             state();
-
+            goal = goal();
         }
-        goal = goal();
+
     }
 
     public void devolverOsDois() {
@@ -601,7 +619,6 @@ public class MC {
             System.out.println("Devolveu os dois");
             state();
             goal = goal();
-
         }
 
     }
@@ -648,7 +665,7 @@ public class MC {
     }
 
     public void inicio() {
-        while (!goal) {
+        while (goal == false) {
             escolheMovimento();
         }
         System.out.println("");
